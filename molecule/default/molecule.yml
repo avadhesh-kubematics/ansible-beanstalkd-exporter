@@ -5,12 +5,12 @@ driver:
   name: docker
 lint: yamllint
 platforms:
-  # - name: bionic
-  #   image: quay.io/paulfantom/molecule-systemd:ubuntu-18.04
-  #   docker_host: "${DOCKER_HOST:-unix://var/run/docker.sock}"
-  #   privileged: true
-  #   volumes:
-  #     - /sys/fs/cgroup:/sys/fs/cgroup:ro
+  - name: bionic
+    image: quay.io/paulfantom/molecule-systemd:ubuntu-18.04
+    docker_host: "${DOCKER_HOST:-unix://var/run/docker.sock}"
+    privileged: true
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
   - name: xenial
     image: quay.io/paulfantom/molecule-systemd:ubuntu-16.04
     docker_host: "${DOCKER_HOST:-unix://var/run/docker.sock}"
