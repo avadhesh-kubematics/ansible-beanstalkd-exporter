@@ -29,18 +29,6 @@
   tags:
     - beanstalkd_exporter_install
 
-- name: Gather currently installed beanstalkd_exporter version (if any)
-  command: "{{ beanstalkd_exporter_binary_install_dir }}/beanstalkd_exporter --version"
-  args:
-    warn: false
-  changed_when: false
-  register: __beanstalkd_exporter_current_version_output
-  check_mode: false
-  when: __beanstalkd_exporter_is_installed.stat.exists
-  tags:
-    - beanstalkd_exporter_install
-    - skip_ansible_lint
-
 - block:
     - name: Get latest release
       uri:
