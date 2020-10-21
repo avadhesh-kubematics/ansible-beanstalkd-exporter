@@ -1,21 +1,21 @@
 ---
 - name: Create the beanstalkd_exporter group
   group:
-    name: "{{ _beanstalkd_exporter_system_group }}"
+    name: "{{ beanstalkd_exporter_system_group }}"
     state: present
     system: true
-  when: _beanstalkd_exporter_system_group != "root"
+  when: beanstalkd_exporter_system_group != "root"
 
 - name: Create the beanstalkd_exporter user
   user:
-    name: "{{ _beanstalkd_exporter_system_user }}"
-    groups: "{{ _beanstalkd_exporter_system_group }}"
+    name: "{{ beanstalkd_exporter_system_user }}"
+    groups: "{{ beanstalkd_exporter_system_group }}"
     append: true
     shell: /usr/sbin/nologin
     system: true
     create_home: false
     home: /
-  when: _beanstalkd_exporter_system_user != "root"
+  when: beanstalkd_exporter_system_user != "root"
 
 - block:
     - name: Download beanstalkd_exporter binary to local folder
@@ -33,7 +33,7 @@
     - name: Propagate beanstalkd_exporter binaries
       copy:
         src: "/tmp/beanstalkd_exporter-{{ beanstalkd_exporter_version }}.linux-{{ go_arch }}"
-        dest: "{{ _beanstalkd_exporter_binary_install_dir }}/beanstalkd_exporter"
+        dest: "{{ beanstalkd_exporter_binary_install_dir }}/beanstalkd_exporter"
         mode: 0755
         owner: root
         group: root
@@ -44,7 +44,7 @@
 - name: propagate locally distributed beanstalkd_exporter binary
   copy:
     src: "{{ beanstalkd_exporter_binary_local_dir }}/beanstalkd_exporter"
-    dest: "{{ _beanstalkd_exporter_binary_install_dir }}/beanstalkd_exporter"
+    dest: "{{ beanstalkd_exporter_binary_install_dir }}/beanstalkd_exporter"
     mode: 0755
     owner: root
     group: root
