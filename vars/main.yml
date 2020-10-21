@@ -7,7 +7,3 @@ go_arch_map:
   armv6l: 'armv6'
 
 go_arch: "{{ go_arch_map[ansible_architecture] | default(ansible_architecture) }}"
-
-_beanstalkd_exporter_binary_install_dir: "/usr/local/bin"
-_beanstalkd_exporter_system_group: "node-exp"
-_beanstalkd_exporter_system_user: "{{ _beanstalkd_exporter_system_group }}"

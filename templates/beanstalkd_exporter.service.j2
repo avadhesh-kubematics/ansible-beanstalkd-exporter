@@ -7,9 +7,9 @@ StartLimitInterval=0
 
 [Service]
 Type=simple
-User={{ _beanstalkd_exporter_system_user }}
-Group={{ _beanstalkd_exporter_system_group }}
-ExecStart={{ _beanstalkd_exporter_binary_install_dir }}/beanstalkd_exporter \
+User={{ beanstalkd_exporter_system_user }}
+Group={{ beanstalkd_exporter_system_group }}
+ExecStart={{ beanstalkd_exporter_binary_install_dir }}/beanstalkd_exporter \
     -beanstalkd.address={{ beanstalkd_exporter_beanstalkd_address }} \
     -web.listen-address={{ beanstalkd_exporter_web_listen_address }}
 
