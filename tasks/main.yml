@@ -9,7 +9,6 @@
   become: true
   when:
     ( not __beanstalkd_exporter_is_installed.stat.exists ) or
-    ( __beanstalkd_exporter_current_version_output.stderr_lines[0].split(" ")[2] != beanstalkd_exporter_version ) or
     ( beanstalkd_exporter_binary_local_dir | length > 0 )
   tags:
     - beanstalkd_exporter_install
