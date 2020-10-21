@@ -1,0 +1,38 @@
+{{ ansible_managed | comment }}
+
+[Unit]
+Description=Prometheus Node Exporter
+After=network-online.target
+StartLimitInterval=0
+
+[Service]
+Type=simple
+User={{ _beanstalkd_exporter_system_user }}
+Group={{ _beanstalkd_exporter_system_group }}
+ExecStart={{ _beanstalkd_exporter_binary_install_dir }}/beanstalkd_exporter \
+    -beanstalkd.address={{ beanstalkd_exporter_beanstalkd_address }} \
+    -web.listen-address={{ beanstalkd_exporter_web_listen_address }}
+
+SyslogIdentifier=beanstalkd_exporter
+Restart=always
+RestartSec=1
+
+PrivateTmp=yes
+{% for m in ansible_mounts if m.mount == '/home' %}
+ProtectHome=read-only
+{% else %}
+ProtectHome=yes
+{% endfor %}
+NoNewPrivileges=yes
+
+{% if beanstalkd_exporter_systemd_version | int >= 232 %}
+ProtectSystem=strict
+ProtectControlGroups=true
+ProtectKernelModules=true
+ProtectKernelTunables=yes
+{% else %}
+ProtectSystem=full
+{% endif %}
+
+[Install]
+WantedBy=multi-user.target

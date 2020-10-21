@@ -1,2 +1,5 @@
 ---
-# defaults file for ansible-beanstalkd-exporter
+beanstalkd_exporter_version: 1.0.5
+beanstalkd_exporter_binary_local_dir: ""
+beanstalkd_exporter_web_listen_address: "0.0.0.0:9109"
+beanstalkd_exporter_beanstalkd_address: "127.0.0.1:11300"

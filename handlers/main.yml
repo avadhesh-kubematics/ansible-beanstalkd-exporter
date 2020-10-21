@@ -1,2 +1,8 @@
 ---
-# handlers file for ansible-beanstalkd-exporter
+- name: restart beanstalkd_exporter
+  become: true
+  systemd:
+    daemon_reload: true
+    name: beanstalkd_exporter
+    state: restarted
+  

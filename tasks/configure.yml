@@ -1,0 +1,9 @@
+---
+- name: Copy the beanstalkd_exporter systemd service file
+  template:
+    src: beanstalkd_exporter.service.j2
+    dest: /etc/systemd/system/beanstalkd_exporter.service
+    owner: root
+    group: root
+    mode: 0644
+  notify: restart beanstalkd_exporter
